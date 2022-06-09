@@ -6,7 +6,7 @@ Esse desafio nos ensina a como utilizar estruturas de dados (_structs_). Você t
 
 Struct ou Estrutura, é uma forma de criar um novo tipo de dados, que conterá vários tipos distintos de dados que caracterizam a estrutura.
 
-## :simple_smile: Como criar um Struct?
+## :slightly_smiling_face: Como criar um Struct?
 
 ```
 struct <nome-do-struct> {
