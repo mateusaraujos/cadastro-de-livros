@@ -2,6 +2,8 @@
 
 Esse desafio nos ensina a como utilizar estruturas de dados (_structs_). Você também pode baixar o [executável para Windows](estrutura.exe) e testar.
 
+![Menu Principal](img/menu.jpeg)
+
 ## :thought_balloon: O que são Structs?
 
 Struct ou Estrutura, é uma forma de criar um novo tipo de dados, que conterá vários tipos distintos de dados que caracterizam a estrutura.
