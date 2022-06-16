@@ -24,210 +24,21 @@ struct livro {
 struct livro cadastro[3];
 int i;
 
-// Função para ordenar os livros por ano.
-void ordenarLivrosPorAno(void) {
-	struct livro troca[3];
-	int j;
-	
-	// Colocando os livros na ordem do mais antigo ao mais novo.
-	for (i=0; i<2; i++) {
-		for (j=i+1; j<3; j++) {
-			// Se o ano do primeiro livro for mair que o ano do segundo livro.
-			if (cadastro[i].ano > cadastro[j].ano) {
-				/*
-					Todas as informações do vetor "cadastro" são guardadas
-					no vetor do mesmo tipo (livro) "troca".
-				*/
-				troca[i] = cadastro[i];
-				/*
-					Todas as informações do livro com ano menor são guardados
-					em primeiro lugar.
-				*/
-				cadastro[i] = cadastro[j];
-				/*
-					Enquanto, no segundo lugar, vão as informações que estavam
-					em primeiro lugar, que estão no vetor "troca".
-				*/
-				cadastro[j] = troca[i];
-			}
-		}
-	}
-	
-	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-	printf("| Livros ordenados por ano.\n");
-	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-	system("pause");
-	system("cls");
-	
-	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-	printf("| Retornando ao Menu Principal...\n");
-	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-	system("pause");
-	system("cls");
-	
-	return;
-}
+// Prototipação das Funções.
+void menu(void);
+void cadastrarLivros(void);
+void imprimirInfosLivros(void);
+void pesquisarLivrosPorCodigo(void);
+void ordenarLivrosPorAno(void);
 
-// Fução para fazer uma pesquisa de livros pelo código.
-void pesquisarLivrosPorCodigo(void) {
-	int busca, acha;
+// Função principal: vai chamar o menu do programa.
+int main() {
+	setlocale(LC_ALL, "Portuguese");
 	
-	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-	printf("::::::::::::::PESQUISAR LIVROS::::::::::::::::\n");
-	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-	printf("::Digite o código do livro::: ");
-	scanf("%d", &busca);
+	// Chamando a função que vai cuidar do resto.
+	menu();
 	
-	i = 0;
-	acha = 0;
-	
-	// Buscando o livro de código "busca".
-	while (acha==0 && i<3) {
-		// Se a busca for igual ao código.
-		if (cadastro[i].codigo == busca) {
-			// Achou!
-			acha = 1;
-		} else {
-			// Se não achar, incrementa.
-			i++;
-		}
-	}
-	
-	if (acha == 1) {
-		// Mostrando qual livro foi achado.
-		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-		printf("| Livro encontrado: ");
-		puts(cadastro[i].titulo);
-		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-		system("pause");
-		system("cls");
-		
-		// Mostrando todos as informações do livro.
-		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-		printf("| Mais informações do livro ");
-		puts(cadastro[i].titulo);
-		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-		printf("----------------------------------------------\n");
-		
-		printf("\n| Código: %d", cadastro[i].codigo);
-		
-		printf("\n| Título: ");
-		puts(cadastro[i].titulo);
-		
-		printf("| Autor: ");
-		puts(cadastro[i].autor);
-		
-		printf("| Área: ");
-		puts(cadastro[i].area);
-		
-		printf("| Ano: %d", cadastro[i].ano);
-		
-		printf("\n| Editora: ");
-		puts(cadastro[i].editora);
-		printf("\n----------------------------------------------\n");
-		system("pause");
-		system("cls");
-		
-		// Redirecionando para o Menu.
-		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-		printf("| Retornando ao Menu Principal...\n");
-		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-		system("pause");
-		system("cls");
-	} else {
-		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-		printf("| Não foi encontrado nenhum livro.\n");
-		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-		system("pause");
-		system("cls");
-	}
-	
-	return;
-}
-
-// Função de exibição dos livros cadastrados.
-void imprimirInfosLivros(void) {
-	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-	printf(":::::::::::::LIVROS CADASTRADOS:::::::::::::::\n");
-	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-	printf("----------------------------------------------\n");
-	
-	// Mostrando os informações dos livros que estão cadastrados.
-	for (i=0; i<3; i++) {
-		printf("\n| Código: %d", cadastro[i].codigo);
-		
-		printf("\n| Título: ");
-		puts(cadastro[i].titulo);
-		
-		printf("| Autor: ");
-		puts(cadastro[i].autor);
-		
-		printf("| Área: ");
-		puts(cadastro[i].area);
-		
-		printf("| Ano: %d", cadastro[i].ano);
-		
-		printf("\n| Editora: ");
-		puts(cadastro[i].editora);
-		
-		printf("\n----------------------------------------------\n");
-	}
-	system("pause");
-	system("cls");
-	
-	// Redirecionando para o Menu.
-	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-	printf("| Retornando ao Menu Principal...\n");
-	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-	system("pause");
-	system("cls");
-	
-	return;
-}
-
-// Função Cadastro de Livros.
-void cadastrarLivros(void) {
-	// Fazendo o cadastro dos livros.
-	for (i=0; i<3; i++) {
-		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-		printf("::::::::::::::CADASTRAR LIVROS::::::::::::::::\n");
-		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-		
-		printf("| Código: ");
-		scanf("%d", &cadastro[i].codigo);
-		fflush(stdin);
-		
-		printf("| Título: ");
-		gets(cadastro[i].titulo);
-		fflush(stdin);
-		
-		printf("| Autor: ");
-		gets(cadastro[i].autor);
-		fflush(stdin);
-		
-		printf("| Área: ");
-		gets(cadastro[i].area);
-		fflush(stdin);
-		
-		printf("| Ano: ");
-		scanf("%d", &cadastro[i].ano);
-		fflush(stdin);
-		
-		printf("| Editora: ");
-		gets(cadastro[i].editora);
-		fflush(stdin);
-		
-		system("cls");
-	}
-	
-	// Redirecionando para o Menu.
-	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-	printf("| Retornando ao Menu Principal...\n");
-	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-	system("pause");
-	system("cls");
-	
-	return;
+	return (0);
 }
 
 // Função Menu do programa: Escolhas.
@@ -324,12 +135,208 @@ void menu(void) {
 	return;
 }
 
-// Função principal: vai chamar o menu do programa.
-int main() {
-	setlocale(LC_ALL, "Portuguese");
+// Função Cadastro de Livros.
+void cadastrarLivros(void) {
+	// Fazendo o cadastro dos livros.
+	for (i=0; i<3; i++) {
+		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+		printf("::::::::::::::CADASTRAR LIVROS::::::::::::::::\n");
+		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+		
+		printf("| Código: ");
+		scanf("%d", &cadastro[i].codigo);
+		fflush(stdin);
+		
+		printf("| Título: ");
+		gets(cadastro[i].titulo);
+		fflush(stdin);
+		
+		printf("| Autor: ");
+		gets(cadastro[i].autor);
+		fflush(stdin);
+		
+		printf("| Área: ");
+		gets(cadastro[i].area);
+		fflush(stdin);
+		
+		printf("| Ano: ");
+		scanf("%d", &cadastro[i].ano);
+		fflush(stdin);
+		
+		printf("| Editora: ");
+		gets(cadastro[i].editora);
+		fflush(stdin);
+		
+		system("cls");
+	}
 	
-	// Chamando a função que vai cuidar do resto.
-	menu();
+	// Redirecionando para o Menu.
+	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+	printf("| Retornando ao Menu Principal...\n");
+	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+	system("pause");
+	system("cls");
 	
-	return (0);
+	return;
+}
+
+// Função de exibição dos livros cadastrados.
+void imprimirInfosLivros(void) {
+	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+	printf(":::::::::::::LIVROS CADASTRADOS:::::::::::::::\n");
+	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+	printf("----------------------------------------------\n");
+	
+	// Mostrando os informações dos livros que estão cadastrados.
+	for (i=0; i<3; i++) {
+		printf("\n| Código: %d", cadastro[i].codigo);
+		
+		printf("\n| Título: ");
+		puts(cadastro[i].titulo);
+		
+		printf("| Autor: ");
+		puts(cadastro[i].autor);
+		
+		printf("| Área: ");
+		puts(cadastro[i].area);
+		
+		printf("| Ano: %d", cadastro[i].ano);
+		
+		printf("\n| Editora: ");
+		puts(cadastro[i].editora);
+		
+		printf("\n----------------------------------------------\n");
+	}
+	system("pause");
+	system("cls");
+	
+	// Redirecionando para o Menu.
+	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+	printf("| Retornando ao Menu Principal...\n");
+	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+	system("pause");
+	system("cls");
+	
+	return;
+}
+
+// Fução para fazer uma pesquisa de livros pelo código.
+void pesquisarLivrosPorCodigo(void) {
+	int busca, acha;
+	
+	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+	printf("::::::::::::::PESQUISAR LIVROS::::::::::::::::\n");
+	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+	printf("::Digite o código do livro::: ");
+	scanf("%d", &busca);
+	
+	i = 0;
+	acha = 0;
+	
+	// Buscando o livro de código "busca".
+	while (acha==0 && i<3) {
+		// Se a busca for igual ao código.
+		if (cadastro[i].codigo == busca) {
+			// Achou!
+			acha = 1;
+		} else {
+			// Se não achar, incrementa.
+			i++;
+		}
+	}
+	
+	if (acha == 1) {
+		// Mostrando qual livro foi achado.
+		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+		printf("| Livro encontrado: ");
+		puts(cadastro[i].titulo);
+		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+		system("pause");
+		system("cls");
+		
+		// Mostrando todos as informações do livro.
+		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+		printf("| Mais informações do livro ");
+		puts(cadastro[i].titulo);
+		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+		printf("----------------------------------------------\n");
+		
+		printf("\n| Código: %d", cadastro[i].codigo);
+		
+		printf("\n| Título: ");
+		puts(cadastro[i].titulo);
+		
+		printf("| Autor: ");
+		puts(cadastro[i].autor);
+		
+		printf("| Área: ");
+		puts(cadastro[i].area);
+		
+		printf("| Ano: %d", cadastro[i].ano);
+		
+		printf("\n| Editora: ");
+		puts(cadastro[i].editora);
+		printf("\n----------------------------------------------\n");
+		system("pause");
+		system("cls");
+		
+		// Redirecionando para o Menu.
+		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+		printf("| Retornando ao Menu Principal...\n");
+		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+		system("pause");
+		system("cls");
+	} else {
+		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+		printf("| Não foi encontrado nenhum livro.\n");
+		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+		system("pause");
+		system("cls");
+	}
+	
+	return;
+}
+
+// Função para ordenar os livros por ano.
+void ordenarLivrosPorAno(void) {
+	struct livro troca[3];
+	int j;
+	
+	// Colocando os livros na ordem do mais antigo ao mais novo.
+	for (i=0; i<2; i++) {
+		for (j=i+1; j<3; j++) {
+			// Se o ano do primeiro livro for mair que o ano do segundo livro.
+			if (cadastro[i].ano > cadastro[j].ano) {
+				/*
+					Todas as informações do vetor "cadastro" são guardadas
+					no vetor do mesmo tipo (livro) "troca".
+				*/
+				troca[i] = cadastro[i];
+				/*
+					Todas as informações do livro com ano menor são guardados
+					em primeiro lugar.
+				*/
+				cadastro[i] = cadastro[j];
+				/*
+					Enquanto, no segundo lugar, vão as informações que estavam
+					em primeiro lugar, que estão no vetor "troca".
+				*/
+				cadastro[j] = troca[i];
+			}
+		}
+	}
+	
+	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+	printf("| Livros ordenados por ano.\n");
+	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+	system("pause");
+	system("cls");
+	
+	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+	printf("| Retornando ao Menu Principal...\n");
+	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+	system("pause");
+	system("cls");
+	
+	return;
 }
