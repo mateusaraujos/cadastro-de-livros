@@ -22,7 +22,7 @@ struct livro {
 
 // Vão ser cadastrados 3 livros
 struct livro cadastro[3];
-int i;
+int i, escolha;
 
 // Prototipação das Funções.
 void menu(void);
@@ -31,20 +31,86 @@ void imprimirInfosLivros(void);
 void pesquisarLivrosPorCodigo(void);
 void ordenarLivrosPorAno(void);
 
-// Função principal: vai chamar o menu do programa.
+// A Função Principal é responsável por redirecionar o programa para outros Menus.
 int main() {
 	setlocale(LC_ALL, "Portuguese");
 	
-	// Chamando a função que vai cuidar do resto.
-	menu();
+	while (escolha != 5) {
+		menu();
+		
+		// Tratando cada opção.
+		switch (escolha) {
+			case 1 :
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf("| Menu Principal > Cadastrar Livros\n");
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				system("pause");
+				system("cls");
+			
+				// Chamando a função para o cadastro dos livros.
+				cadastrarLivros();
+				break;
+			case 2 :
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf("| Menu Principal > Livros Cadastrados\n");
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				system("pause");
+				system("cls");
+			
+				// Chamando a função para mostrar as informações dos livros cadastrados.
+				imprimirInfosLivros();
+				break;
+			case 3 :
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf("| Menu Principal > Pesquisar Livros\n");
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				system("pause");
+				system("cls");
+			
+				// Chamando a função para pesquisar os livros por código.
+				pesquisarLivrosPorCodigo();
+				break;
+			case 4 :
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf("| Ordenando os livros por ano...\n");
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				system("pause");
+				system("cls");
+			
+				// Chamando a função que ordena os livros por ano.
+				ordenarLivrosPorAno();
+				break;
+			case 5 :
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf("| Saindo...\n");
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				system("pause");
+				system("cls");
+			
+				// Chamando a função de para encerrar o programa com êxito.
+				exit(EXIT_SUCCESS);
+				break;
+			default:
+				system("cls");
+			
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf("| ERRO: Digite uma escolha válida.\n");
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+				system("pause");
+				system("cls");
+				break;
+		}
+	}
 	
 	return (0);
 }
 
-// Função Menu do programa: Escolhas.
+// Função do Menu Principal.
 void menu(void) {
-	int escolha;
-	
 	// Mostrando todas as opções.
 	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
 	printf(":::::::::::::::::MENU PRINCIPAL::::::::::::::\n");
@@ -57,80 +123,6 @@ void menu(void) {
 	printf("::ESCOLHA::: ");
 	scanf("%d", &escolha);
 	fflush(stdin);
-	
-	// Casos das opções acima.
-	switch (escolha) {
-		// Sempre redirecionando para essa mesma função menu().
-		case 1 :
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			printf("| Menu Principal > Cadastrar Livros\n");
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			system("pause");
-			system("cls");
-			
-			// Chamando a função para o cadastro dos livros.
-			cadastrarLivros();
-			menu();
-			break;
-		case 2 :
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			printf("| Menu Principal > Livros Cadastrados\n");
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			system("pause");
-			system("cls");
-			
-			// Chamando a função para mostrar as informações dos livros cadastrados.
-			imprimirInfosLivros();
-			menu();
-			break;
-		case 3 :
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			printf("| Menu Principal > Pesquisar Livros\n");
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			system("pause");
-			system("cls");
-			
-			// Chamando a função para pesquisar os livros por código.
-			pesquisarLivrosPorCodigo();
-			menu();
-			break;
-		case 4 :
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			printf("| Ordenando os livros por ano...\n");
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			system("pause");
-			system("cls");
-			
-			// Chamando a função que ordena os livros por ano.
-			ordenarLivrosPorAno();
-			menu();
-			break;
-		case 5 :
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			printf("| Saindo...\n");
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			system("pause");
-			system("cls");
-			
-			// Chamando a função de para encerrar o programa com êxito.
-			exit(EXIT_SUCCESS);
-			break;
-		default:
-			system("cls");
-			
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			printf("| ERRO: Digite uma escolha válida.\n");
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-			system("pause");
-			system("cls");
-			
-			menu();
-			break;
-	}
 	
 	return;
 }
