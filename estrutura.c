@@ -1,6 +1,6 @@
 /*
-	O problema consiste em elaborar um cadastro
-	para 3 livros, contendo as seguintes informações:
+	O problema consiste em elaborar cadastros de
+	livros contendo as seguintes informações:
 	código, título, autor, área, ano e editora.
 	Desenvolver um menu com as seguintes opções:
 		1. Cadastrar os livros.
@@ -20,9 +20,9 @@ struct livro {
 	char titulo[50], autor[30], area[30], editora[30];
 };
 
-// Vão ser cadastrados 3 livros
-struct livro cadastro[3];
-int i, escolha;
+// Serão cadastrados quantos livros forem necessários.
+struct livro *cadastro; // Usando um ponteiro.
+int i, escolha, tamanho; // Tamanho do ponteiro.
 
 // Prototipação das Funções.
 void menu(void);
@@ -34,6 +34,9 @@ void ordenarLivrosPorAno(void);
 // A Função Principal é responsável por redirecionar o programa para outros Menus.
 int main() {
 	setlocale(LC_ALL, "Portuguese");
+	
+	// Alocação dinâmica para vários cadastros de livros.
+	cadastro = (struct livro *) malloc(sizeof(int) * tamanho);
 	
 	while (escolha != 5) {
 		menu();
@@ -130,37 +133,37 @@ void menu(void) {
 // Função Cadastro de Livros.
 void cadastrarLivros(void) {
 	// Fazendo o cadastro dos livros.
-	for (i=0; i<3; i++) {
-		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-		printf("::::::::::::::CADASTRAR LIVROS::::::::::::::::\n");
-		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+	printf("::::::::::::::CADASTRAR LIVROS::::::::::::::::\n");
+	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+	
+	printf("| Código: ");
+	scanf("%d", &cadastro[tamanho].codigo);
+	fflush(stdin);
+	
+	printf("| Título: ");
+	gets(cadastro[tamanho].titulo);
+	fflush(stdin);
+	
+	printf("| Autor: ");
+	gets(cadastro[tamanho].autor);
+	fflush(stdin);
+	
+	printf("| Área: ");
+	gets(cadastro[tamanho].area);
+	fflush(stdin);
+	
+	printf("| Ano: ");
+	scanf("%d", &cadastro[tamanho].ano);
+	fflush(stdin);
+	
+	printf("| Editora: ");
+	gets(cadastro[tamanho].editora);
+	fflush(stdin);
+	
+	tamanho++;
 		
-		printf("| Código: ");
-		scanf("%d", &cadastro[i].codigo);
-		fflush(stdin);
-		
-		printf("| Título: ");
-		gets(cadastro[i].titulo);
-		fflush(stdin);
-		
-		printf("| Autor: ");
-		gets(cadastro[i].autor);
-		fflush(stdin);
-		
-		printf("| Área: ");
-		gets(cadastro[i].area);
-		fflush(stdin);
-		
-		printf("| Ano: ");
-		scanf("%d", &cadastro[i].ano);
-		fflush(stdin);
-		
-		printf("| Editora: ");
-		gets(cadastro[i].editora);
-		fflush(stdin);
-		
-		system("cls");
-	}
+	system("cls");
 	
 	// Redirecionando para o Menu.
 	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
@@ -180,7 +183,7 @@ void imprimirInfosLivros(void) {
 	printf("----------------------------------------------\n");
 	
 	// Mostrando os informações dos livros que estão cadastrados.
-	for (i=0; i<3; i++) {
+	for (i = 0; i < tamanho; i++) {
 		printf("\n| Código: %d", cadastro[i].codigo);
 		
 		printf("\n| Título: ");
@@ -226,7 +229,7 @@ void pesquisarLivrosPorCodigo(void) {
 	acha = 0;
 	
 	// Buscando o livro de código "busca".
-	while (acha==0 && i<3) {
+	while (acha == 0 && i < tamanho) {
 		// Se a busca for igual ao código.
 		if (cadastro[i].codigo == busca) {
 			// Achou!
@@ -291,12 +294,12 @@ void pesquisarLivrosPorCodigo(void) {
 
 // Função para ordenar os livros por ano.
 void ordenarLivrosPorAno(void) {
-	struct livro troca[3];
+	struct livro troca[tamanho];
 	int j;
 	
 	// Colocando os livros na ordem do mais antigo ao mais novo.
-	for (i=0; i<2; i++) {
-		for (j=i+1; j<3; j++) {
+	for (i = 0; i < tamanho - 1; i++) {
+		for (j = i + 1; j < tamanho; j++) {
 			// Se o ano do primeiro livro for mair que o ano do segundo livro.
 			if (cadastro[i].ano > cadastro[j].ano) {
 				/*
