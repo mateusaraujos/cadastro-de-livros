@@ -109,6 +109,9 @@ int main() {
 		}
 	}
 	
+	// Liberando o espaço alocado na memória para o ponteiro cadastro.
+	free(cadastro);
+	
 	return (0);
 }
 
@@ -132,45 +135,61 @@ void menu(void) {
 
 // Função Cadastro de Livros.
 void cadastrarLivros(void) {
-	// Fazendo o cadastro dos livros.
-	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-	printf("::::::::::::::CADASTRAR LIVROS::::::::::::::::\n");
-	printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
-	
-	printf("| Código: ");
-	scanf("%d", &cadastro[tamanho].codigo);
-	fflush(stdin);
-	
-	printf("| Título: ");
-	gets(cadastro[tamanho].titulo);
-	fflush(stdin);
-	
-	printf("| Autor: ");
-	gets(cadastro[tamanho].autor);
-	fflush(stdin);
-	
-	printf("| Área: ");
-	gets(cadastro[tamanho].area);
-	fflush(stdin);
-	
-	printf("| Ano: ");
-	scanf("%d", &cadastro[tamanho].ano);
-	fflush(stdin);
-	
-	printf("| Editora: ");
-	gets(cadastro[tamanho].editora);
-	fflush(stdin);
-	
-	tamanho++;
+	// Testando a função malloc().
+	if (cadastro == NULL) { // Se malloc() não achar um local na memória para alocar.
+		system("cls");
 		
-	system("cls");
+		printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+		printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+		printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+		printf("| ERRO: Memória insuficiente!\n");
+		printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+		printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+		printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+		system("pause");
+		system("cls");
+	} else {
+		// Fazendo o cadastro dos livros.
+		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+		printf("::::::::::::::CADASTRAR LIVROS::::::::::::::::\n");
+		printf("::::::::::::::::::::::::::::::::::::::::::::::\n");
+		
+		printf("| Código: ");
+		scanf("%d", &cadastro[tamanho].codigo);
+		fflush(stdin);
+		
+		printf("| Título: ");
+		gets(cadastro[tamanho].titulo);
+		fflush(stdin);
+		
+		printf("| Autor: ");
+		gets(cadastro[tamanho].autor);
+		fflush(stdin);
+		
+		printf("| Área: ");
+		gets(cadastro[tamanho].area);
+		fflush(stdin);
+		
+		printf("| Ano: ");
+		scanf("%d", &cadastro[tamanho].ano);
+		fflush(stdin);
+		
+		printf("| Editora: ");
+		gets(cadastro[tamanho].editora);
+		fflush(stdin);
+		
+		// Acrescentando mais uma posição no vetor.
+		tamanho++;
+		
+		system("cls");
 	
-	// Redirecionando para o Menu.
-	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-	printf("| Retornando ao Menu Principal...\n");
-	printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
-	system("pause");
-	system("cls");
+		// Redirecionando para o Menu.
+		printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+		printf("| Retornando ao Menu Principal...\n");
+		printf(":::::::::::::::::::::::::::::::::::::::::::::\n");
+		system("pause");
+		system("cls");
+	}
 	
 	return;
 }
